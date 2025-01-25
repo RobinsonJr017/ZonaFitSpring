@@ -2,10 +2,8 @@ package gm.zona_fit.servicio;
 
 import gm.zona_fit.modelo.Cliente;
 import gm.zona_fit.repositorio.ClienteRepositorio;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

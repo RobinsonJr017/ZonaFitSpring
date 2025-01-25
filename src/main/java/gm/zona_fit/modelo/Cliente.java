@@ -14,7 +14,7 @@ import lombok.*;
 @EqualsAndHashCode
 public class Cliente {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //Si es auntoincrementable es mejor usar IDENTITY
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nombre;
     private String apellido;
