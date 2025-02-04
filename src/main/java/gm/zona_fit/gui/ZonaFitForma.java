@@ -10,6 +10,7 @@ import javax.swing.*;
 @Component
 public class ZonaFitForma extends JFrame{
     private JPanel panelPrincipal;
+    private JTable clientesTabla;
     IClienteServicio clienteServicio;
 
     @Autowired
