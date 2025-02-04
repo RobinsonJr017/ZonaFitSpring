@@ -15,5 +15,13 @@ public class ZonaFitForma extends JFrame{
     @Autowired
     public ZonaFitForma(ClienteServicio clienteServicio){
         this.clienteServicio = clienteServicio;
+        iniciarForma();
+    }
+
+    private void iniciarForma(){
+        setContentPane(panelPrincipal);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(900, 700);
+        setLocationRelativeTo(null); //Centrar Ventana
     }
 }
