@@ -39,6 +39,8 @@ public class ZonaFitForma extends JFrame{
                 cargarClienteSeleccionado();
             }
         });
+        eliminarButton.addActionListener(e -> eliminarCliente());
+        limpiarButton.addActionListener(e -> limpiarFormulario());
     }
 
     private void iniciarForma(){
@@ -50,13 +52,21 @@ public class ZonaFitForma extends JFrame{
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        this.tableModeloCliente = new DefaultTableModel(0, 4);
+        //this.tableModeloCliente = new DefaultTableModel(0, 4);
+        //Evitamos la edicion de los valores de las celdas de las tabla
+        this.tableModeloCliente = new DefaultTableModel(0, 4){
+            @Override
+            public  boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
         String[] cabaceros = {"ID", "Nombre", "Apellido", "Membresia"};
         this.tableModeloCliente.setColumnIdentifiers(cabaceros);
         this.clientesTabla = new JTable(tableModeloCliente);
+        // Restringimos la seleecion de la tabla a un solo registro
+        this.clientesTabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         // Cargar Listado de clientes
         listarClientes();
-
     }
 
     private void listarClientes(){
@@ -115,6 +125,21 @@ public class ZonaFitForma extends JFrame{
             var membresia = clientesTabla.getModel().getValueAt(renglon, 3).toString();
             this.membresiaTexto.setText(membresia);
         }
+    }
+
+    private void eliminarCliente(){
+        var renglon = clientesTabla.getSelectedRow();
+        if(renglon != -1){
+            var idClienteStr = clientesTabla.getModel().getValueAt(renglon, 0).toString();
+            this.idCliente = Integer.parseInt(idClienteStr);
+            var cliente = new Cliente();
+            cliente.setId(this.idCliente);
+            clienteServicio.eliminarCliente(cliente);
+            mostrarMensaje("Cliente con ID: " + this.idCliente + " eliminado");
+            limpiarFormulario();
+            listarClientes();
+        } else
+            mostrarMensaje("Debe seleccionar un cliente existente");
     }
 
     private void limpiarFormulario(){
